@@ -1,3 +1,4 @@
+#Bu proje git hub üzerinden güncellendi
 class GaleriSistemi:
     def __init__(self):
         self.araclar = {
