@@ -8,7 +8,7 @@ class GaleriSistemi:
             "Ford Focus":     {"durum": "Musait", "fiyat": 1900},
             "BMW 320i":       {"durum": "Musait", "fiyat": 3500}
         }
-        # YENI: Müşteri listesi
+        
         self.musteriler = []
 
     def araclari_goster(self):
@@ -32,14 +32,14 @@ class GaleriSistemi:
             self.araclar[secim]["durum"] = "Musait"
             print(f"\n>>> ISLEM TAMAM: {secim} geri alindi.")
 
-    # YENI: Müşteri ekleme fonksiyonu
+    
     def musteri_ekle(self):
         isim = input("\nMusteri Adi Soyadi: ")
         self.musteriler.append(isim)
         print(f">>> {isim} sisteme eklendi.")
         print("Guncel Musteriler:", self.musteriler)
 
-# --- PROGRAM DONGUSU ---
+
 galeri = GaleriSistemi()
 
 while True:
