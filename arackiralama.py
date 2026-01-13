@@ -1,6 +1,5 @@
 class GaleriSistemi:
     def __init__(self):
-     
         self.araclar = {
             "Fiat Egea":      {"durum": "Musait", "fiyat": 1200},
             "Renault Clio":   {"durum": "Musait", "fiyat": 1300},
@@ -8,6 +7,8 @@ class GaleriSistemi:
             "Ford Focus":     {"durum": "Musait", "fiyat": 1900},
             "BMW 320i":       {"durum": "Musait", "fiyat": 3500}
         }
+        # YENI: Müşteri listesi
+        self.musteriler = []
 
     def araclari_goster(self):
         print("\n--- 🚗 GUNCEL ARAC LISTESI ---")
@@ -18,50 +19,40 @@ class GaleriSistemi:
     def arac_kirala(self):
         self.araclari_goster()
         secim = input("\nKiralamak istediginiz aracin tam adini yazin: ")
-        
-        if secim in self.araclar:
-            if self.araclar[secim]["durum"] == "Musait":
-                self.araclar[secim]["durum"] = "Kirada"
-                print(f"\n>>> BASARILI! {secim} kiralandi. Iyi yolculuklar!")
-            else:
-                print(f"\n>>> HATA: {secim} su an zaten kirada!")
+        if secim in self.araclar and self.araclar[secim]["durum"] == "Musait":
+            self.araclar[secim]["durum"] = "Kirada"
+            print(f"\n>>> BASARILI! {secim} kiralandi.")
         else:
-            print("\n>>> HATA: Boyle bir arac galerimizde yok.")
+            print("\n>>> HATA: Arac yok veya zaten kirada.")
 
     def iade_al(self):
         secim = input("\nIade edilecek aracin adini yazin: ")
-        
         if secim in self.araclar:
-            if self.araclar[secim]["durum"] == "Kirada":
-                self.araclar[secim]["durum"] = "Musait"
-                print(f"\n>>> ISLEM TAMAM: {secim} galerimize geri alindi.")
-            else:
-                print(f"\n>>> BILGI: {secim} zaten bizde (Musait durumda).")
-        else:
-            print("\n>>> HATA: Bu arac bizim sistemimize kayitli degil.")
+            self.araclar[secim]["durum"] = "Musait"
+            print(f"\n>>> ISLEM TAMAM: {secim} geri alindi.")
 
+    # YENI: Müşteri ekleme fonksiyonu
+    def musteri_ekle(self):
+        isim = input("\nMusteri Adi Soyadi: ")
+        self.musteriler.append(isim)
+        print(f">>> {isim} sisteme eklendi.")
+        print("Guncel Musteriler:", self.musteriler)
+
+# --- PROGRAM DONGUSU ---
 galeri = GaleriSistemi()
 
 while True:
-    print("\n" + "="*30)
-    print("   OTO GALERI YONETIM SISTEMI")
-    print("="*30)
+    print("\n=== OTO GALERI V3 ===")
     print("1. Araclari Listele")
     print("2. Arac Kirala")
     print("3. Arac Iade Al")
-    print("4. Cikis")
+    print("4. Musteri Ekle (YENI)")
+    print("5. Cikis")
     
-    kullanici_secimi = input("Yapmak istediginiz islem (1-4): ")
+    secim = input("Seciminiz: ")
     
-    if kullanici_secimi == '1':
-        galeri.araclari_goster()
-    elif kullanici_secimi == '2':
-        galeri.arac_kirala()
-    elif kullanici_secimi == '3':
-        galeri.iade_al()
-    elif kullanici_secimi == '4':
-        print("Sistemden cikiliyor... Iyi gunler!")
-        break
-    else:
-        print("Gecersiz secim, lutfen tekrar deneyin.")
-    
+    if secim == '1': galeri.araclari_goster()
+    elif secim == '2': galeri.arac_kirala()
+    elif secim == '3': galeri.iade_al()
+    elif secim == '4': galeri.musteri_ekle()
+    elif secim == '5': break
